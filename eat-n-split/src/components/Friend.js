@@ -1,7 +1,8 @@
 import Button from "./Button";
-function Friend({ friends }) {
+function Friend({ friends, selectFriends, selectFriend }) {
+  const isSelected = selectFriend?.id === friends.id;
   return (
-    <li>
+    <li className={isSelected ? "selected" : ""}>
       <img src={friends.image} alt={friends.name} />
       <h3>{friends.name}</h3>
       {friends.balance < 0 && (
@@ -22,7 +23,9 @@ function Friend({ friends }) {
           are even
         </p>
       )}
-      <Button>Select</Button>
+      <Button onClick={() => selectFriends(friends)}>
+        {isSelected ? "Close" : "Select"}
+      </Button>
     </li>
   );
 }
