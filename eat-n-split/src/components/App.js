@@ -44,6 +44,19 @@ export default function App() {
     );
     setShowFriendInput(false);
   }
+
+  function handleBill(value) {
+    console.log(value);
+    setFriends(
+      friends.map((friend) =>
+        friend.id === selectFriend.id
+          ? { ...friend, balance: friend.balance + value }
+          : friend
+      )
+    );
+    setSelectedFriend(null);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -59,7 +72,9 @@ export default function App() {
           {showFriendInput ? "Close" : "Add Friend"}
         </Button>
       </div>
-      {selectFriend && <SplitBill selectFriend={selectFriend} />}
+      {selectFriend && (
+        <SplitBill selectFriend={selectFriend} onHandleBill={handleBill} />
+      )}
     </div>
   );
 }
